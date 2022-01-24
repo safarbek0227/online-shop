@@ -1,0 +1,90 @@
+{% extends "wrapper.html" %}
+{% load static %}
+{% block content %}
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Menu
+        </h2>
+      </div>
+  
+
+        
+      <div class="row mt-5">
+        <div class="col-md-6">
+            <img src="{{product.image.url}}" alt="{{product.image.Slug}}">
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <h5 class="name">
+              {{product.name}}
+            </h5>
+            <p class="desc">
+              {{product.description}}
+            </p>
+            <div class="options">
+              <h6>
+                ${{product.price}}
+              </h6>
+            </div>
+            <button class="btn btn-warning mt-5 text-light" onclick="AddCart({{product.id}})">
+              <i class="fas fa-shopping-cart"> Add to cart</i>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1 class="h1 m-5">Related  product</h1>
+      <div class="owl-carousel product_owl-carousel mr-5">
+        {% for relates in related %}
+          <div class="box m-5" style="width: 300px;">
+            <div>
+              <div class="img-box">
+                <img src="/media/{{relates.image}}" alt="{{relates.name}}" >
+              </div>
+              <div class="detail-box">
+                <h5 class="name">
+                  {{relates.name}}
+                </h5>
+                <p class="desc">
+                  {{relates.description}}
+                </p>
+                <div class="options">
+                  <h6>
+                    ${{relates.price}}
+                  </h6>
+                  <a href='{% url "main:detail" relates.Slug %}'>
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+  </section>
+  <script>
+    function AddCart(id){
+    let d = id
+    let data = JSON.stringify(d)
+	  if (window.XMLHttpRequest) {
+      var xhttp=new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+        var xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4 && xhttp.status === 200) {
+      var data = JSON.parse(this.responseText);
+
+    }
+    }
+    var url = "/AddCart/"
+    xhttp.open("GET", url+`?data=${data}`, true);
+    xhttp.send();
+  }
+  </script>
+{% endblock content %}

@@ -31,9 +31,9 @@ $(window).on('load', function () {
 });
 
 // nice select
-$(document).ready(function() {
+$(document).ready(function () {
     $('select').niceSelect();
-  });
+});
 
 /** google_map js **/
 function myMap() {
@@ -85,10 +85,59 @@ $(".product_owl-carousel").owlCarousel({
         768: {
             items: 2
         },
-        1000: {
+        1336:{
+            item:3
+        },
+        1340: {
             items: 4
         }
     }
 });
+let arr = []
+if (JSON.parse(localStorage.getItem('item'))){
+    arr = JSON.parse(localStorage.getItem('item'))
+}
+else{
+    arr = []
+    localStorage.setItem('item', JSON.stringify([]))
+}
+function AddCart(id) {
+    if (arr.includes(id) != true) {
+        arr.push(id)
+        localStorage.setItem('item', JSON.stringify(arr))
+        send()
+        
+    }
+    else{
+        alert('This product  already added')
+    }
+}
+function remove(id){
+    a = arr.indexOf(id)
+    console.log(a)
+    arr.splice(a, a+1)
+    localStorage.setItem('item', JSON.stringify(arr))
+    send()
+}
 
+window.addEventListener('load', send)
+function send(){
+    let data = localStorage.getItem('item')
+    if (window.XMLHttpRequest) {
+        var xhttp = new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+        var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data)
+        }
 
+    }
+    var url = "/addcard/"
+    xhttp.open("GET", url + `?data=${data}`, true);
+    xhttp.send();
+    console.log('i am send')
+}
+    

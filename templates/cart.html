@@ -1,0 +1,43 @@
+{% extends "wrapper.html" %}
+{% load static %}
+{% block content %}
+<section class="container">
+    <h1 class="d-flex">Your card</h1>
+    <div class="d-flex justify-content-end align-items-end">
+        <h1 class="mr-5">Total: <span class="total">0</span></h1>
+        <h1><button class="btn btn-danger" onclick="pay()">pay</button></h1>
+    </div>
+</section>
+<hr>
+{%if not has_itarable %}
+{%for products in pro %}
+<div class="row m-5">
+    <div class="col-md-3">
+        <img src="/media/{{products.image}}" alt="" width="90px">
+    </div>
+    <div class="col-md-4 p-1">
+        <h1 class="name">{{products.name}}</h1>
+    </div>
+    <div class="col-md-2 p-1">
+        <h1 class="d-inline">Price: $<span class="price">{{products.price}}</span></h1>
+    </div>
+    <div class="col-md-2">
+        <h2 class="d-inline">Count: <span class="count">1</span></h2>
+        <button class="btn btn-warning" onclick="plus()">+</button>
+        <button class="btn btn-warning" onclick="minus()">-</button>
+    </div>
+    <div class="col-md-1">
+        <h2 class="d-inline">
+            $<span class="recent-price">{{products.price}}</span>
+            <a href="/card/" class="btn btn-danger d-inline" onclick=remove({{products.id}})>X</a>
+        </h2>
+    </div>
+</div>
+
+<hr>
+{% endfor %}
+{% else %}
+<h1 class="h1">any thingh</h1>
+{% endif %}
+<script src="/static/js/card.js"></script>
+{% endblock content %}

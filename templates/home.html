@@ -1,6 +1,8 @@
 {% extends "wrapper.html" %}
 {% load static %}
 {% block content %}
+<!-- food section -->
+
 <section class="food_section layout_padding-bottom">
   <div class="container">
     <div class="heading_container heading_center">
@@ -23,27 +25,29 @@
           <div class="box">
             <div>
               <div class="img-box">
-                <img src="{{product.image.url}}" alt="{{product.name}}">
+                <a href='{% url "main:detail" product.Slug %}' class="text-light">
+                  <img src="{{product.image.url}}" alt="{{product.name}}">
+                </a>
               </div>
               <div class="detail-box">
-                <h5 class="name">
-                  {{product.name}}
-                </h5>
-                <p class="desc">
-                  {{product.description}}
-                </p>
-                <div class="options">
-                  <h6>
-                    ${{product.price}}
+                  <a href='{% url "main:detail" product.Slug %}' class="text-light">
+                  <h5 class="name">
+                    {{product.name}}
+                  </h5>
+                  <p class="desc">
+                    {{product.description}}
+                  </p>
+                  <h6 class="">
+                    <strong>Price:</strong> ${{product.price}}
                   </h6>
-                  <a href="{% url "main:detail" product.Slug %}">
-                    <i class="fas fa-shopping-cart"></i>
                   </a>
+                  <button class="btn btn-warning mt-5 text-light "  onclick=AddCart({{product.id}})>
+                    <i class="fas fa-shopping-cart"> Add to cart</i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         {% endfor %}
 
 
@@ -52,11 +56,8 @@
 
       </div>
     </div>
-    <div class="btn-box">
-      <a href="">
-        View More
-      </a>
-    </div>
   </div>
 </section>
+
+<!-- end food section -->
 {% endblock content %}

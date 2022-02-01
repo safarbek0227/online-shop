@@ -4,21 +4,20 @@
 <!-- food section -->
 
 <section class="food_section layout_padding-bottom">
-  <div class="container">
-    <div class="heading_container heading_center">
-      <h2>
-        Our Menu
-      </h2>
-    </div>
-
-    <ul class="filters_menu">
-      <li class="active" data-filter="*">All</li>
-      {% for category in categories %}
-      <li data-filter=".{{category.slug}}">{{category.name}}</li>
-      {% endfor %}
-    </ul>
-
-    <div class="filters-content">
+<div class="container">
+  <div class="heading_container heading_center">
+    <h2>
+      Our Menu
+    </h2>
+  </div>
+  
+  <ul class="filters_menu">
+    <li class="active" data-filter="*">All</li>
+    {% for category in categories %}
+    <li data-filter=".{{category.slug}}">{{category.name}}</li>
+    {% endfor %}
+  </ul>
+      <div class="filters-content">
       <div class="row grid">
         {% for product in products %}
         <div class="col-sm-6 col-lg-4 all {{product.category}}">

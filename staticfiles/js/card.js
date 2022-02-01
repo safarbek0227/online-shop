@@ -10,6 +10,7 @@
             all_price += parseInt(all[i].innerText)
         }
         total.innerText = all_price
+        return all_price
     }
     function plus() {
         Element = event.target.parentElement.parentElement
@@ -47,11 +48,31 @@
         productname = document.querySelectorAll('.name')
         if (0<count.length){
             for(var i = 0; i < count.length; i++){
-                text += `${productname[i].innerText}: ${count[i].innerText}ta ${price[i].innerText}$  Jami:${recent[i].innerText}$ \n`
+                text += `${count[i].innerText}ta  ${productname[i].innerText}: ${price[i].innerText}$  Jami:${recent[i].innerText}$ \n`
             }
         }
         else{ 
             alert('siz haliyab biror bir ovqat zakaz qilmadiz')
-        }
-        console.log(text)
+        }  
+        text += 'Jami:' + calculator()
+        return text
     }
+function submit(){
+    user = document.getElementById('name').value
+    phone = document.getElementById('phone').value
+    if( user != '' && phone != ''){
+        var text = []
+        text.push(user)
+        text.push(phone)
+        text.push(pay())
+        var xhttp = new XMLHttpRequest();
+        var url = "/check/"
+        xhttp.open("GET", url + `?data=${text}`, true);
+        xhttp.send();
+        localStorage.clear('item')
+    }
+    else{
+        alert('please write your name and phone')
+    }
+
+}

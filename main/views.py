@@ -7,6 +7,12 @@ from django.http import JsonResponse
 from datetime import datetime
 import json
 from .models import *
+import telebot
+
+TOKEN = '5092916545:AAElg9jee_ZMmtNoAqKqGAR5vQ0GqtIEf6k'
+bot = telebot.TeleBot(TOKEN)
+user = 801531808
+bot.send_message(user, f"site iso online")
 # Create your views here.
 def homeView(request):
     return render(request, "index.html",)
@@ -18,18 +24,19 @@ def ProductDetailView(request,slug):
     related =  list(product.objects.filter(category=food.category).values())
     return render(request, 'product.html', {'product': food, "related":related})
 
+global my
+my = []
 def Addcart(request):
-    global card
-    card = json.loads(request.GET["data"])
+    global my
+    my = json.loads(request.GET["data"])
     return JsonResponse({'success': 200}) 
 def card(request):
-    print(card)
-    objects = [product.objects.get(id=id_) for id_ in card]
-    return render(request, 'cart.html',{'pro' : objects})
+    objects = [product.objects.get(id=id_) for id_ in my]
+    return render(request, 'cart.html', {'pro': objects})
     
 def check(request):
-    a = request.GET
-    print(a)
-    return render(request, "form.html",)
+    a = json.loads(request.GET['data'])
+    bot.send_message(user, f"zakazchi: {a[0]},\n\n telefon nomeri: {a[1]}, \n\n buyurtma: \n\n {a[2]}")
+    return JsonResponse({'success': 200}) 
 
 

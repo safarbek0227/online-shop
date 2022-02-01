@@ -11,22 +11,15 @@
         <div class="row">
             <div class="col-md-6">
 
-                <form>
-                    {% csrf_token %}
-                    <div class="form_container">
-                        <input type="date" class="form-control">
-                        <input type="text" class="form-control" placeholder="Your Name" />
-                        <input type="text" class="form-control" placeholder="Phone Number" />
-                        <button type="submit">Book Now </button>
-                       
-                    </div>
+                <form action="/check/" method="get">
+                    <label for="your_name">Your name: </label>
+                    <input id="name" type="text" name="name" maxlength="100" required class="form-control">
+                    <br>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="97-236-26-77" class="form-control">
+                    <br>
+                    <input type="submit" value="OK" class="btn btn-warning text-light">
                 </form>
 
-            </div>
-            <div class="col-md-6">
-                <div class="map_container ">
-                    <div id="googleMap"></div>
-                </div>
             </div>
         </div>
     </div>

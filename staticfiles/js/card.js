@@ -65,6 +65,8 @@ function submit(){
         text.push(user)
         text.push(phone)
         text.push(pay())
+        
+        text = JSON.stringify(text)
         var xhttp = new XMLHttpRequest();
         var url = "/check/"
         xhttp.open("GET", url + `?data=${text}`, true);

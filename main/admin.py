@@ -9,4 +9,4 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(product)
 class productAdmin(admin.ModelAdmin):
-	prepopulated_fields = {'Slug':('name',)}
+	prepopulated_fields = {'slug':('name',)}

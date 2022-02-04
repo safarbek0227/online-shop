@@ -8,7 +8,7 @@ import json
 from .models import *
 import telebot
 
-TOKEN = '5092916545:AAElg9jee_ZMmtNoAqKqGAR5vQ0GqtIEf6k'
+TOKEN = 'yur bot token'
 bot = telebot.TeleBot(TOKEN)
 user = 801531808
 bot.send_message(user, f"site iso online")
@@ -19,23 +19,29 @@ def menuView(request):
     return render(request, "home.html")
 
 def ProductDetailView(request,slug):
-    food = product.objects.select_related("category").get(Slug=slug)
+    food = product.objects.select_related("category").get(slug=slug)
     related =  list(product.objects.select_related("category").filter(category=food.category).values())
     return render(request, 'product.html', {'product': food, "related":related})
 
-global my
-my = []
+
 def Addcart(request):
-    global my
     my = json.loads(request.GET["data"])
-    return JsonResponse({'success': 200}) 
+    d = []
+    objects = list(product.objects.select_related("category").filter(id=id_).values() for id_ in my)
+    for i in objects:
+        d +=i
+    return JsonResponse({'success': d}) 
 def card(request):
-    objects = [product.objects.select_related("category").get(id=id_) for id_ in my]
-    return render(request, 'cart.html', {'pro': objects})
+    # objects = [product.objects.select_related("category").get(id=id_) for id_ in my]
+    return render(request, 'cart.html', )
     
 def check(request):
     a = json.loads(request.GET['data'])
-    bot.send_message(user, f"zakazchi: {a[0]},\n\n telefon nomeri: {a[1]}, \n\n buyurtma: \n\n {a[2]}")
+    text = ''
+    for i in a[2]:
+        products = product.objects.get(id=i[0])
+        text += f'{ i[1]}ta \n {products.name} \n narxi: {products.price}\n jami: {products.price * i[1]} \n \n'
+    bot.send_message(user, f"zakazchi: {a[0]},\n\n telefon nomeri: {a[1]}, \n\n buyurtma:\n {text}")
     return redirect("/card/")
 
 

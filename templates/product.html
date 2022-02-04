@@ -13,7 +13,7 @@
         
       <div class="row mt-5">
         <div class="col-md-6">
-            <img src="{{product.image.url}}" alt="{{product.image.Slug}}" width="300px">
+            <img src="{{product.image.url}}" alt="{{product.image.slug}}" width="300px">
         </div>
         <div class="col-md-6">
           <div class="detail-box">
@@ -42,12 +42,12 @@
           <div class="box m-4 mini-box">
             <div>
               <div class="img-box">
-                <a href='{% url "main:detail" product.Slug %}' class="text-light">
+                <a href='{% url "main:detail" product.slug %}' class="text-light">
                   <img src="/media/{{product.image}}" alt="{{product.name}}">
                 </a>
               </div>
               <div class="detail-box  mini-detail">
-                  <a href='{% url "main:detail" product.Slug %}' class="">
+                  <a href='{% url "main:detail" product.slug %}' class="">
                   <h5 class="name">
                     {{product.name}}
                   </h5>

@@ -19,7 +19,7 @@ class tag(models.Model):
     
 class product(models.Model):
     name = models.CharField('nomi', max_length=25)
-    Slug = models.SlugField('*', max_length=25)
+    slug = models.SlugField('*', max_length=25)
     image = models.ImageField("Product image", upload_to='product_images/')
     category = models.ForeignKey(tag, on_delete=CASCADE)
     price = models.PositiveIntegerField("Price", default=0)

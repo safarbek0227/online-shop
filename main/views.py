@@ -8,9 +8,9 @@ import json
 from .models import *
 import telebot
 
-TOKEN = '5092916545:AAElg9jee_ZMmtNoAqKqGAR5vQ0GqtIEf6k'
+TOKEN = 'youe token'
 bot = telebot.TeleBot(TOKEN)
-user = 801531808
+user = "your id"
 bot.send_message(user, f"site iso online")
 # Create your views here.
 def homeView(request):

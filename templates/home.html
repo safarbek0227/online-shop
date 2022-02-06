@@ -4,28 +4,28 @@
 <!-- food section -->
 
 <section class="food_section layout_padding-bottom">
-<div class="container">
-  <div class="heading_container heading_center">
-    <h2>
-      Our Menu
-    </h2>
-  </div>
-  
-  <ul class="filters_menu">
-    <li class="active" data-filter="*">All</li>
-    {% for category in categories %}
-    <li data-filter=".{{category.slug}}">{{category.name}}</li>
-    {% endfor %}
-  </ul>
-      <div class="filters-content">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Our Menu
+      </h2>
+    </div>
+
+    <ul class="filters_menu">
+      <li class="active" data-filter="*">All</li>
+      {% for category in categories %}
+      <li data-filter=".{{category.slug}}">{{category.name}}</li>
+      {% endfor %}
+    </ul>
+
+    <div class="filters-content">
       <div class="row grid">
         {% for product in products %}
         <div class="col-sm-6 col-lg-4 all {{product.category}}">
           <div class="box">
-            <div>
               <div class="img-box">
                 <a href='{% url "main:detail" product.slug %}' class="text-light">
-                  <img src="{{product.image.url}}" alt="{{product.name}}">
+                  <img src="{{product.image.url}}" alt="{{product.name}}" class="img">
                 </a>
               </div>
               <div class="detail-box">
@@ -40,13 +40,12 @@
                     <strong>Price:</strong> ${{product.price}}
                   </h6>
                   </a>
-                  <button class="btn btn-warning mt-5 text-light "  onclick=AddCart({{product.id}})>
+                  <button class="btn btn-warning mt-5 text-light my-btn cart-btn" onclick=AddCart({{product.id}})>
                     <i class="fas fa-shopping-cart"> Add to cart</i>
                   </button>
-                </div>
               </div>
-            </div>
           </div>
+        </div>
         {% endfor %}
 
 
@@ -54,6 +53,11 @@
 
 
       </div>
+    </div>
+    <div class="btn-box">
+      <a href="/menu/">
+        View More
+      </a>
     </div>
   </div>
 </section>

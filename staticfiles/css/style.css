@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap");
-
+*{
+  transition: all 0.3 ;
+}
 body {
   font-family: "Open Sans", sans-serif;
   color: #0c0c0c;
@@ -130,13 +132,21 @@ a:focus {
   width: 100%;
   height: 100%;
 }
-.sub_page .header_section{
+body.sub_page .header_section{
   background: url(/static/images/hero-bg.jpg) top center ;
   background-size: cover;
   z-index: 998 !important;
   padding: 15px;
   position: fixed;
+  animation-name: example;
+  animation-duration: 1s;
   width: 100vw;
+}
+@keyframes example {
+  from {transform: translateY(-200px);
+    opacity: 0;}
+  to {transform: translateY(0);
+    opacity: 1;}
 }
 .sub_page .hero_area .bg-box img {
   width: 100%;
@@ -148,6 +158,7 @@ a:focus {
 }
 
 .header_section {
+  transition: all 2s;
   padding: 15px 0;
 }
 .header_section .container-fluid {

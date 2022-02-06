@@ -8,7 +8,7 @@ import json
 from .models import *
 import telebot
 
-TOKEN = 'yur bot token'
+TOKEN = '5092916545:AAElg9jee_ZMmtNoAqKqGAR5vQ0GqtIEf6k'
 bot = telebot.TeleBot(TOKEN)
 user = 801531808
 bot.send_message(user, f"site iso online")

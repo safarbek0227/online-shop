@@ -85,8 +85,8 @@ $(".product_owl-carousel").owlCarousel({
         768: {
             items: 2
         },
-        1336:{
-            item:3
+        1336: {
+            item: 3
         },
         1340: {
             items: 4
@@ -94,10 +94,10 @@ $(".product_owl-carousel").owlCarousel({
     }
 });
 let arr = []
-if (JSON.parse(localStorage.getItem('item'))){
+if (JSON.parse(localStorage.getItem('item'))) {
     arr = JSON.parse(localStorage.getItem('item'))
 }
-else{
+else {
     arr = []
     localStorage.setItem('item', JSON.stringify([]))
 }
@@ -105,17 +105,62 @@ function AddCart(id) {
     if (arr.includes(id) != true) {
         arr.push(id)
         localStorage.setItem('item', JSON.stringify(arr))
+        //if add to cart btn clicked
         
     }
-    else{
-        alert('This product  already added')
+    else {
     }
 }
-function remove(id){
+
+function remove(id) {
     a = arr.indexOf(id)
     console.log(a)
-    arr.splice(a, a+1)
+    arr.splice(a, a + 1)
     localStorage.setItem('item', JSON.stringify(arr))
     send()
 }
 
+let count = 0;
+$('.cart-btn').on('click', function () {
+    let cart = $('.cart-nav');
+    // find the img of that card which button is clicked by user
+    let imgtodrag = $(this).parent('.detail-box').parent('.box').find("img").eq(0);
+    if (imgtodrag) {
+        // duplicate the img
+        var imgclone = imgtodrag.clone().offset({
+            top: imgtodrag.offset().top,
+            left: imgtodrag.offset().left
+        }).css({
+            'opacity': '0.8',
+            'position': 'absolute',
+            'height': '150px',
+            'width': '150px',
+            'z-index': '10000'
+        }).appendTo($('body')).animate({
+            'top': cart.offset().top + 20,
+            'left': cart.offset().left + 30,
+            'width': 75,
+            'height': 75
+        }, 1500, 'easeInOutExpo');
+
+        setTimeout(function () {
+            count = count +1
+            $(".cart-nav").text(count);
+        }, 1500);
+
+        imgclone.animate({
+            'width': 0,
+            'height': 0
+        }, function () {
+            $(this).detach()
+        });
+    }
+});
+
+$(window).scroll(function(){
+    if ($(this).scrollTop() > 450) {
+       $('body').addClass('sub_page');
+    } else {
+       $('body').removeClass('sub_page');
+    }
+});

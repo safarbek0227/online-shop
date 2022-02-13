@@ -11,42 +11,49 @@ function send() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var data = JSON.parse(this.responseText);
             let elem = ''
-            for (let i = 0; i < data.success.length; i++) {
-                products = data.success[i]
-                elem += `<div class="row m-5">
-                <div class="col-md-2">
-                <img src="/media/${products.image}" alt="" width="90px">
-                </div>
-                <div class="col-md-2 p-1 mb-3">
-                <h1 class="name">${products.name}</h1>
-                </div>
-                <div class="col-md-3 p-1 mb-3">
-                <h1 class="d-inline">Price: $<span class="price">${products.price}</span></h1>
-                </div>
-                <div class="col-md-3 mb-3">
-                <h2 class="d-inline">Count: <span class="count">1</span></h2>
-                <br class="d-block d-lg-none">
-                <button class="btn btn-warning" onclick="plus()">+</button>
-                <button class="btn btn-warning" onclick="minus()">-</button>
-                </div>
-                <div class="col-md-1 mb-3">
-                <h2 class="d-inline">
-                $<span class="recent-price">${products.price}$</span>
-                </h2>
-                </div>
-                </div>
-                <a href="/card/" class="btn btn-danger d-inline" onclick=remove(${products.id})>X</a>
-                <hr>`
-                
+            if (data.success.length > 0) {
+                for (let i = 0; i < data.success.length; i++) {
+                    products = data.success[i]
+                    elem += `<div class="row m-5">
+                    <div class="col-md-2">
+                    <img src="/media/${products.image}" alt="" width="90px">
+                    </div>
+                    <div class="col-md-2 p-1 mb-3">
+                    <h1 class="name">${products.name}</h1>
+                    </div>
+                    <div class="col-md-3 p-1 mb-3">
+                    <h1 class="d-inline">Price: $<span class="price">${products.price}</span></h1>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                    <h2 class="d-inline">Count: <span class="count">1</span></h2>
+                    <br class="d-block d-lg-none">
+                    <button class="btn btn-warning" onclick="plus()">+</button>
+                    <button class="btn btn-warning" onclick="minus()">-</button>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                    <h2 class="d-inline">
+                    $<span class="recent-price">${products.price}$</span>
+                    </h2>
+                    </div>
+                    </div>
+                    <a href="/card/" class="btn btn-danger d-inline" onclick=remove(${products.id})>X</a>
+                    <hr>`
+
+                }
+            }
+            else {
+                elem = `<br><br><br>
+                        <h1>Your are not any order</h1>
+                        <br><br><br>
+                        `
             }
             document.querySelector('.cart').innerHTML = elem
         }
-        
+
     }
     var url = "/addcard/"
     xhttp.open("GET", url + `?data=${data}`, true);
     xhttp.send();
-    console.log('send')
 }
 
 function plus() {
@@ -76,31 +83,38 @@ function minus() {
     }
 }
 
-
+check = '[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}'
 
 function submit() {
-    user = document.getElementById('name').value
-    phone = document.getElementById('phone').value
-    get = JSON.parse(localStorage.getItem('item'))
-    cart = document.querySelectorAll('.count')
-    if (user != '' && phone != '') {
-        var text = []
-        text.push(user)
-        text.push(phone)
-        arr =[]
-        for (let i = 0; i < get.length; i++) {
-            arr.push([get[i], parseInt(cart[i].innerText)])
+    if (document.getElementById('phone').value.match(check)) {
+        user = document.getElementById('name').value
+        phone = document.getElementById('phone').value
+        get = JSON.parse(localStorage.getItem('item'))
+        cart = document.querySelectorAll('.count')
+        if (user != '' && phone != '' && get != '') {
+            var text = []
+            text.push(user)
+            text.push(phone)
+            arr = []
+            for (let i = 0; i < get.length; i++) {
+                arr.push([get[i], parseInt(cart[i].innerText)])
+            }
+            text.push(arr)
+            text = JSON.stringify(text)
+            var xhttp = new XMLHttpRequest();
+            var url = "/check/"
+            xhttp.open("GET", url + `?data=${text}`, true);
+            xhttp.send();
+            localStorage.clear('item')
+            setTimeout(function () { location.reload(); }, 1010)
+
         }
-        text.push(arr)
-        text = JSON.stringify(text)
-        var xhttp = new XMLHttpRequest();
-        var url = "/check/"
-        xhttp.open("GET", url + `?data=${text}`, true);
-        xhttp.send();
-        localStorage.clear('item')
+        else {
+            alert('please write your name and phone or add order')
+        }
     }
     else {
-        alert('please write your name and phone')
+        alert('Please write true format for phone')
     }
-    
+
 }

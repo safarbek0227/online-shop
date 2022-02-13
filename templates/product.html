@@ -1,11 +1,12 @@
 {% extends "wrapper.html" %}
 {% load static %}
 {% block content %}
+<br><br><br>
 <section class="food_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Our Menu
+          Our Food
         </h2>
       </div>
   
@@ -28,7 +29,7 @@
                 ${{product.price}}
               </h6>
             </div>
-            <button class="btn btn-warning mt-5 text-light" onclick="AddCart({{product.id}})">
+            <button class="btn btn-warning mt-5 text-light product-btn" onclick="AddCart({{product.id}})">
               <i class="fas fa-shopping-cart"> Add to cart</i>
             </button>
             
@@ -58,7 +59,7 @@
                     <strong>Price:</strong> ${{product.price}}
                   </h6>
                   </a>
-                  <button class="btn btn-warning"  onclick=AddCart({{product.id}})>
+                  <button class="btn btn-warning corusel-btn  text-light"  onclick=AddCart({{product.id}})>
                     <i class="fas fa-shopping-cart"> Add to cart</i>
                   </button>
                 </div>
@@ -69,7 +70,5 @@
       </div>
     </div>
   </section>
-<style>
 
-</style>
 {% endblock content %}

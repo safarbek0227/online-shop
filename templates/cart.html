@@ -1,6 +1,7 @@
 {% extends "wrapper.html" %}
 {% load static %}
 {% block content %}
+<br><br>
 <section class="container">
     <div class="row">
         <div class="col-md-6">
@@ -8,29 +9,56 @@
             <div>
                 <input id="name" class="form-control" placeholder="your name">
                 <br>
-                <input type="tel" id="phone" pattern="[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="97-236-26-77"
-                    class="form-control">
+                <input type="tel" id="phone" pattern="[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}" placeholder="972362677"
+                    class="form-control" value="972361677">
                 <br>
-                <a href='/card/'class="text-light" onclick="submit()">
-                <button class="btn btn-warning text-light" >
-                       pay       
+                <a class="text-light" onclick="submit()">
+                    <button class="btn btn-warning text-light">
+                        pay
                     </button>
                 </a>
             </div>
         </div>
         <div class="col-md-6">
-            
-
+            {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <h1><li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li></h1>
+                        {% endfor %}
+                    </ul>
+            {% endif %}      
         </div>
     </div>
 </section>
 
 <hr>
 <section class="cart">
-
+    <br>
+    <br>
+    <div class="spinner"></div>
+    <br>
+    <br>
 </section>
+<style>
+    .spinner {
+        height: 60px;
+        width: 60px;
+        margin: 0 auto;
+        position: relative;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        animation: spinner 1s infinite linear;
+        border: 6px solid rgba(0, 0, 0, .2);
+        border-radius: 100%;
+        border-left: 6px solid #ffbe33;
+    }
+    @keyframes spinner {
+        from {transform:rotate(0deg);}
+        to {transform:rotate(360deg);}
+    }
 
-<hr>
+</style>
 {% endblock content %}
 {% block link %}
 <script src="/static/js/card.js"></script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    
+    <title>Customer: {{order.customer}}</title>
+</head>
+<body>
+    <div class="container" style="padding: 7rem 0;">
+        <div class="row">
+            <div class="col-md-6">
+                <ul>
+                    <li><h4><strong>Customer</strong>: {{order.customer}}</h4></li>
+                    <li><h4><strong>telephone number</strong>: <a href="+998{{order.tel}}" class="text-warning">+998{{order.tel}}</a></h4></li>
+                    <li><h4><strong>Total:</strong> {{order.total}}$</h4></li>
+                    <li class="mt-4"><pre><h4>About Oredr</h4>
+                            <h5>{{order.text}}</h5>
+                    </li></pre>                    
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    {% for i in order.order.all %}
+                    <div class="col">
+                        <div class="card d-flex m-1" style="border: none !important;">
+                            <a href="/detail/{{i.product.slug}}" class="text-dark">
+                                <img class="card-img-top" src="{{i.product.image.url}}" alt="Card image cap" style="width: 120px; height: 100px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{i.product.name}}</h5>
+                                    <h5>count: {{i.count}}x</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        body, ul, li, h4{
+            color: #3b3b3b !important;
+        }
+        html{
+            overflow-x: hidden;
+        }
+        body{
+            overflow-x: hidden !important;
+        }
+    </style>
+</body>
+</html>

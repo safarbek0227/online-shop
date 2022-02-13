@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/superadmin.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content">
+
+        <div class="container">
+            <h2 class="mb-5">Table  Order</h2>
+
+            <div class="table-responsive">
+
+                <table class="table custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                            </th>
+                            <th scope="col">Order</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">TEl</th>
+                            <th scope="col">description</th>
+                            <th scope="col">Order</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for order in orders %}
+                        <tr  {% if order.is_arrived %}style="text-decoration: line-through;"{% endif%} >
+                            <th scope="row">
+                                <label class="control control--checkbox">
+                                    <input type="checkbox"  {% if order.is_arrived %}checked disabled {% endif%} onclick="check({{order.id}})"/>
+                                    <div class="control__indicator fas">    
+                                    </div>
+                                </label>
+                            </th>
+                            <td>
+
+                            </td>
+                            <td><a href="/superadmin/{{order.id}}" class="text-dark">{{order.customer}}</a></td>
+                            <td>
+                                +998<a href="tel:+998{{order.tel}}" class="text-dark">{{order.tel}}</a>
+                            </td>
+                            <td>
+                                <pre>{{order.text}}</pre>
+                            </td>
+                            <td>
+                                <ul class="persons">
+                                    {% for i in order.order.all %}
+                                    <li>
+                                        <a href="/detail/{{i.product.slug}}">
+                                            <img src="{{i.product.image.url}}" alt="" class="img-fluid">
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>
+                               Total price: {{order.total}}$
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function check(id) {
+        let data = localStorage.getItem('item')
+        if (window.XMLHttpRequest) {
+            var xhttp = new XMLHttpRequest();
+        } else {  // code for IE6, IE5
+            var xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+            }
+
+        }
+    var url = "/checkadmin/"
+    xhttp.open("GET", url + `?data=${id}`, true);
+    xhttp.send();
+    setTimeout(function () { location.reload(); }, 100)
+    }
+    </script>
+</body>
+
+</html>

@@ -122,9 +122,26 @@ function remove(id) {
 
 let count = 0;
 $('.cart-btn').on('click', function () {
-    let cart = $('.cart-nav');
     // find the img of that card which button is clicked by user
     let imgtodrag = $(this).parent('.detail-box').parent('.box').find("img").eq(0);
+    fly_cart(imgtodrag)
+});
+$('.product-btn').on('click', function () {
+    // find the img of that card which button is clicked by user
+    let imgtodrag = $(this).parent('.detail-box').parent('.col-md-6').parent('.row').find("img").eq(0);
+    fly_cart(imgtodrag)  
+});
+
+  
+$('.corusel-btn').on('click', function () {
+    // find the img of that card which button is clicked by user
+    let imgtodrag = $(this).parent('div').parent('div').parent('div').find("img").eq(0)
+    fly_cart(imgtodrag)
+});
+
+
+function fly_cart(imgtodrag){
+    let cart = $('.cart-nav');
     if (imgtodrag) {
         // duplicate the img
         var imgclone = imgtodrag.clone().offset({
@@ -142,25 +159,17 @@ $('.cart-btn').on('click', function () {
             'width': 75,
             'height': 75
         }, 1500, 'easeInOutExpo');
-
+  
         setTimeout(function () {
             count = count +1
             $(".cart-nav").text(count);
         }, 1500);
-
+  
         imgclone.animate({
             'width': 0,
             'height': 0
         }, function () {
             $(this).detach()
         });
-    }
-});
-
-$(window).scroll(function(){
-    if ($(this).scrollTop() > 450) {
-       $('body').addClass('sub_page');
-    } else {
-       $('body').removeClass('sub_page');
-    }
-});
+    }   
+}

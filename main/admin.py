@@ -2,11 +2,14 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
-@admin.register(tag)
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
 	list_display = ['name', 'slug']
 	prepopulated_fields = {'slug':('name',)}
 
-@admin.register(product)
+@admin.register(Product)
 class productAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Order)
+admin.site.register(Cart)

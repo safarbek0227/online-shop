@@ -10,7 +10,7 @@ import json
 from .models import *
 import telebot
 
-TOKEN = '5261118959:AAFids6j-ivj-zv2gS5yE3yt9BkvVPXTby0'
+TOKEN = ''
 bot = telebot.TeleBot(TOKEN)
 user = "801531808"
 # Create your views here.

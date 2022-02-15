@@ -15,28 +15,28 @@ function send() {
                 for (let i = 0; i < data.success.length; i++) {
                     products = data.success[i]
                     elem += `<div class="row m-5">
-                    <div class="col-md-2">
+                    <div class="col-lg-2">
                     <img src="/media/${products.image}" alt="" width="90px">
                     </div>
-                    <div class="col-md-2 p-1 mb-3">
+                    <div class="col-lg-2 p-1 mb-3">
                     <h1 class="name">${products.name}</h1>
                     </div>
-                    <div class="col-md-3 p-1 mb-3">
+                    <div class="col-lg-3 p-1 mb-3">
                     <h1 class="d-inline">Price: $<span class="price">${products.price}</span></h1>
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-lg-2 mb-3">
                     <h2 class="d-inline">Count: <span class="count">1</span></h2>
                     <br class="d-block d-lg-none">
                     <button class="btn btn-warning" onclick="plus()">+</button>
                     <button class="btn btn-warning" onclick="minus()">-</button>
                     </div>
-                    <div class="col-md-1 mb-3">
+                    <div class="col-lg-2 mb-3">
                     <h2 class="d-inline">
                     $<span class="recent-price">${products.price}$</span>
+                    <a href="/card/" class="btn btn-danger d-inline" onclick=remove(${products.id})>X</a>
                     </h2>
                     </div>
                     </div>
-                    <a href="/card/" class="btn btn-danger d-inline" onclick=remove(${products.id})>X</a>
                     <hr>`
 
                 }

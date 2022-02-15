@@ -10,12 +10,11 @@ import json
 from .models import *
 import telebot
 
-TOKEN = ''
+TOKEN = '5261118959:AAFids6j-ivj-zv2gS5yE3yt9BkvVPXTby0'
 bot = telebot.TeleBot(TOKEN)
 user = "801531808"
 # Create your views here.
 def homeView(request):
-    print(request.user)
     return render(request, "index.html",)
 def menuView(request):
     return render(request, "home.html")
@@ -57,26 +56,9 @@ def check(request):
     bot.send_message(user, f"zakazchi: {a[0]},\n\n telefon nomeri: {a[1]}, \n\n buyurtma:\n {text} \n Total: {price}$  \n\n http://127.0.0.1:5000/superadmin/{o.id}")
 
     return JsonResponse({'success': 200}) 
-    
-def login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username,password=password)
-        if user:
-            if user.is_active:
-                print('active')
-                return redirect("/superadmin")
-        else:
-            messages.error(request,'username or password not correct')
-        
-                
-    else:
-        form = AuthenticationForm()
-    return render(request, "superadmin/login.html", {'form':form})
 
-    
+
+@login_required(login_url="/login/")    
 def superadmin(request):
     user = authenticate(username='safarbek',password='2007')
     if user.is_active:
@@ -91,7 +73,7 @@ def checkorder(request):
     a.is_arrived = True
     a.save()
     return JsonResponse({'success': 200}) 
-
+@login_required(login_url="/login/")
 def CheckView(request, num):
     order = Order.objects.get(id=num)
     return render(request, 'superadmin/customer.html', {'order': order})

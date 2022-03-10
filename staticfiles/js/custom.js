@@ -115,7 +115,7 @@ function AddCart(id) {
 function remove(id) {
     a = arr.indexOf(id)
     console.log(a)
-    arr.splice(a, a + 1)
+    arr.splice(a, a+1)
     localStorage.setItem('item', JSON.stringify(arr))
     send()
 }

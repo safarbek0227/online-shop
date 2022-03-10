@@ -99,6 +99,7 @@ function submit() {
             for (let i = 0; i < get.length; i++) {
                 arr.push([get[i], parseInt(cart[i].innerText)])
             }
+            console.log(arr)
             text.push(arr)
             text = JSON.stringify(text)
             var xhttp = new XMLHttpRequest();

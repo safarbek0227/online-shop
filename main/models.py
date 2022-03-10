@@ -27,6 +27,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["-id"]
+        unique_together = ["slug"]
 class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=CASCADE)
     count = models.PositiveIntegerField('soni',default=0)

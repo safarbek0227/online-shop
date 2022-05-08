@@ -859,7 +859,9 @@ body.sub_page .header_section.anit{
   padding: 75px 0 40px 0;
   text-align: center;
 }
-
+.footer_section a{
+  text-decoration: none !;
+}
 .footer_section h4 {
   font-size: 28px;
 }

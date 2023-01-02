@@ -15,5 +15,5 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(template_name="superadmin/logout.html"),name="logout"),
     path("superadmin/", views.superadmin, name='superadmin'),
     path("checkadmin/", views.checkorder, name='superadmin'),
-    path("superadmin/<int:num>", views.CheckView, name='superadmin'),
+    path("superadmin/", views.CheckView, name='superadmin'),
 ]

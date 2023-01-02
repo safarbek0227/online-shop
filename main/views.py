@@ -16,10 +16,13 @@ user = "801531808"
 # Create your views here.
 def homeView(request):
     return render(request, "index.html",)
+    
 def menuView(request):
     return render(request, "home.html")
+
 def about(request):
     return render(request, "about.html")
+
 def ProductDetailView(request,slug):
     food = Product.objects.select_related("category").get(slug=slug)
     related =  list(Product.objects.select_related("category").filter(category=food.category).values())
@@ -62,7 +65,13 @@ def check(request):
 def superadmin(request):
     user = authenticate(username='safarbek',password='2007')
     if user.is_active:
-        return render(request, 'superadmin/superadmin.html', {'orders': Order.objects.all()})
+        is_arrived = list(Order.objects.filter(is_arrived = True))
+        not_arrived = list(Order.objects.filter(is_arrived= False))
+        order = not_arrived + is_arrived
+        context= {
+            'orders':  order
+        }
+        return render(request, 'superadmin/superadmin.html', context)
     else:
         return redirect("/login")
 

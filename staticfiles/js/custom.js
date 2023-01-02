@@ -11,6 +11,7 @@ getYear();
 
 // isotope js
 $(window).on('load', function () {
+    $(".cart-nav").text(JSON.parse(localStorage.getItem('item')).length);
     $('.filters_menu li').click(function () {
         $('.filters_menu li').removeClass('active');
         $(this).addClass('active');
@@ -46,7 +47,7 @@ function myMap() {
 
 // client section owl carousel
 $(".client_owl-carousel").owlCarousel({
-    loop: true,
+    loop: false,
     margin: 0,
     dots: false,
     nav: true,
@@ -71,7 +72,7 @@ $(".client_owl-carousel").owlCarousel({
 });
 
 $(".product_owl-carousel").owlCarousel({
-    loop: true,
+    loop: false,
     margin: 0,
     dots: false,
     nav: true,
@@ -96,6 +97,7 @@ $(".product_owl-carousel").owlCarousel({
 let arr = []
 if (JSON.parse(localStorage.getItem('item'))) {
     arr = JSON.parse(localStorage.getItem('item'))
+
 }
 else {
     arr = []
@@ -105,6 +107,7 @@ function AddCart(id) {
     if (arr.includes(id) != true) {
         arr.push(id)
         localStorage.setItem('item', JSON.stringify(arr))
+
         //if add to cart btn clicked
         
     }
@@ -162,7 +165,7 @@ function fly_cart(imgtodrag){
   
         setTimeout(function () {
             count = count +1
-            $(".cart-nav").text(count);
+            $(".cart-nav").text(JSON.parse(localStorage.getItem('item')).length);
         }, 1500);
   
         imgclone.animate({
